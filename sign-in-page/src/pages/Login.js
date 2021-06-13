@@ -5,7 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 class Login extends Component {
   state = {
     form: {
-      username: "",
+      name: "",
       password: "",
     },
   };
@@ -16,6 +16,7 @@ class Login extends Component {
         [e.target.name]: e.target.value,
       },
     });
+    console.log(this.state.form)
   };
 
   render() {
@@ -29,7 +30,7 @@ class Login extends Component {
             <input
               type="text"
               className="form-control"
-              name="username"
+              name="name"
               onChange={this.handleChange}
             />
             <br />
