@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import "../css/Login.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import axios from 'axios'
+
+
+const apiUrl = 'http://localhost:4000/user/sign-in'
 
 class Login extends Component {
   state = {
@@ -19,6 +23,22 @@ class Login extends Component {
     console.log(this.state.form)
   };
 
+  iniciarSesion=async()=>
+  await axios.post(apiUrl,{email: this.state.form.name, password: this.state.form.password})
+  .then (res=>{
+  return res.data;
+})
+  .then (res=>{
+    if (res.isAuthenticated){
+      console.log(res)
+    alert('Bienvenido de nuevo '+this.state.form.name)
+    window.location.href='./home';
+    } 
+  })
+ .catch(error=>{
+    console.log(error);
+    alert('el usuario o la contraseña no son correctos')
+ })
   render() {
     return (
       <div className="containerPrincipal">
@@ -43,7 +63,7 @@ class Login extends Component {
               onChange={this.handleChange}
             />
             <br />
-            <button className="btn btn-primary">Iniciar Sesión</button>
+            <button className="btn btn-primary" onClick={()=>this.iniciarSesion()} >Iniciar Sesión</button>
           </div>
           <br></br>
           <p>
