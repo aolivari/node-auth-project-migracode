@@ -5,14 +5,15 @@ import axios from 'axios'
 
 
 
-const apiUrl = 'http://localhost:4000/user/sign-in'
+const apiUrl = 'http://localhost:4000/user/sign-up'
 
-class Login extends Component {
+class Newuser extends Component {
   take="prueba"
   state = {
     form: {
       name: "",
-      password: "",
+      email:"",
+      password: ""
     },
   };
 
@@ -27,37 +28,45 @@ class Login extends Component {
   };
 
   iniciarSesion=async()=>
-  await axios.post(apiUrl,{email: this.state.form.name, password: this.state.form.password})
+  await axios.post(apiUrl,{name: this.state.form.name, email: this.state.form.email, password: this.state.form.password})
   .then (res=>{
   return res.data;
 })
   .then (res=>{
     if (res.isAuthenticated){
       console.log(res)
-    alert('Bienvenido de nuevo '+this.state.form.name)
+    alert('tu usuario '+this.state.form.name + " ha sido creado con exito")
     window.location.href='./home';
     } 
   })
  .catch(error=>{
     console.log(error);
-    alert('el usuario o la contraseña no son correctos')
+    alert('el usuario ya ha sido creado')
  })
 
-  crearusuario(){
-   console.log("creado")
-  }
+  
+  
   render() {
     return (
       <div className="containerPrincipal">
         <div className="containerSecundario">
-          <h2>Login</h2>
+          <h2>New User</h2>
           <div className="form-group">
-            <label>Email: </label>
+          <label>Usuario: </label>
             <br />
             <input
               type="text"
               className="form-control"
               name="name"
+              onChange={this.handleChange}
+            />
+            <br />
+            <label>Email: </label>
+            <br />
+            <input
+              type="text"
+              className="form-control"
+              name="Email"
               onChange={this.handleChange}
             />
             <br />
@@ -82,4 +91,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default Newuser;

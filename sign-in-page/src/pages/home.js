@@ -1,12 +1,19 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-function Home() {
+export default class home extends Component {
+  volver(){
+    window.location.href='./'
+  }
+  
+  
+  render() {
+    
     return (
-        <div>
-          <h1>estas en la pagina de home
-          </h1>
-        </div>
+      <div>
+        <h1>Muy bien has logrado entrar!
+        </h1>
+        <button className="btn btn-primary" onClick={()=>this.volver()}  >cerrar sesion</button>
+      </div>
     )
+  }
 }
-
-export default Home
